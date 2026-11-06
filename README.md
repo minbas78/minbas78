@@ -138,8 +138,6 @@ easy. Download the new release and repeat the installation steps.
 
 To uninstall `minbas78`, delete the folder where the compiler is located.
 
-===========================================
-
 ## Installing from Source
 
 If you really want to install from source (though this is not recommended), clone the `minbas78` from `github`:

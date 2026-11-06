@@ -1,0 +1,32 @@
+#include <windows.h>
+
+1 ICON "images/mb.ico"
+
+1 VERSIONINFO
+FILEVERSION     0,0,0,1
+PRODUCTVERSION  0,0,0,1
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0x0L
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",        "minbas78\0"
+            VALUE "LegalCopyright",     "Copyright (C) 2026 minbas78. All rights reserved.\0"
+            VALUE "FileDescription",    "Minimal BASIC 1978 Compiler\0"
+            VALUE "InternalName",       "minbas78\0"
+            VALUE "OriginalFilename",   "minbas78.exe\0"
+            VALUE "FileVersion",        "0.0.0.1\0"
+            VALUE "ProductName",        "minbas78\0"
+            VALUE "ProductVersion",     "0.0.0.1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END

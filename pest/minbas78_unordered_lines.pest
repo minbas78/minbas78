@@ -1,0 +1,32 @@
+//! Basic grammar rules for the binary tree map.
+//!
+
+/*****************************************************************************
+ *  4. CHARACTERS AND STRINGS                                                *
+ *****************************************************************************/
+/// `digit` grammar rule that represents any ASCII digit `(0-9)`.
+///
+digit                       = _{ ASCII_DIGIT }
+
+/*****************************************************************************
+ *  5. PROGRAMS                                                              *
+ *****************************************************************************/
+/// `program` grammar rule.
+///
+program 		            = { line* ~ EOI }
+
+/// `line` grammar rule.
+///
+line 			            = { line_number ~ statement ~ end_of_line }
+
+/// `line_number` grammar rule.
+///
+line_number 	            = { digit ~ digit? ~ digit? ~ digit? }
+
+/// `end_of_line` grammar rule.
+///
+end_of_line                 = _{ NEWLINE }
+
+/// `statement` grammar rule.
+///
+statement                   = _{ ( !end_of_line ~ ANY)* }

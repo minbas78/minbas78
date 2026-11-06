@@ -10,7 +10,7 @@ readme = "README.md"
 homepage = "https://minbas78.github.io/minbas78/"
 repository = "https://github.com/minbas78/minbas78"
 license = "MIT OR Apache-2.0"
-keywords = ["ansi", "basic", "compiler", "dartmouth", "ecma", "rust", "windows", "x64"]
+keywords = ["ansi", "basic", "compiler", "dartmouth", "ecma"]
 categories = ["command-line-utilities", "compilers", "development-tools"]
 build = "build.rs"
 

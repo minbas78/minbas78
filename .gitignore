@@ -1,0 +1,13 @@
+/.vscode
+/*.asc
+/*.bas
+/*.bat
+/*.clif
+/*.dot
+/*.exe
+/*.gpg
+/*.lib
+/*.obj
+/*.ron
+/*.zip*
+/target

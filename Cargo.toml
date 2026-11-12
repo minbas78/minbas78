@@ -1,6 +1,6 @@
 [package]
 name = "minbas78"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["foprofile"]
 edition = "2024"
 rust-version = "1.99.1"

@@ -35,11 +35,22 @@ pub const MAIN: &str = "main";
 
 /// Constant name for the linker `target` architecture.
 ///
+#[cfg(windows)]
 pub const TARGET: &str = "x86_64-pc-windows-msvc";
+#[cfg(not(windows))]
+pub const TARGET: &str = "x86_64-unknown-linux-musl";
 
 /// Constant name for the linker `tool` filename.
 ///
+#[cfg(target_os = "windows")]
 pub const TOOL: &str = "link.exe";
+#[cfg(target_os = "linux")]
+pub const TOOL: &str = "cc";
+
+/// Constant name for the linker filename extension in `linux`.
+///
+#[cfg(target_os = "linux")]
+pub const LINUX_PROGRAM_LIBRARY_EXTENSION: &str = "a";
 
 /// Constant name for the `global data` variable.
 ///

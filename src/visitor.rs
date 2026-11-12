@@ -588,6 +588,7 @@ impl<'a> Visitor<'a> {
         Ok(())
     }
 
+    #[cfg(target_os = "windows")]
     pub fn generate_executable_file(
         program_object_file: &PathBuf,
         program_library_file: &PathBuf,
@@ -601,23 +602,52 @@ impl<'a> Visitor<'a> {
         let mut command = Command::new(tool.path());
         command.envs(tool.env().iter().cloned());
         command
-                .arg("/nologo")
+            .arg("/nologo")
+            .arg(format!("{}", &program_object_file.display()))
+            .arg(program_library_file)
+            .arg("msvcrt.lib")
+            .arg("ws2_32.lib")
+            .arg("ntdll.lib")
+            .arg("userenv.lib")
+            .arg("advapi32.lib")
+            .arg("ole32.lib")
+            .arg("oleaut32.lib")
+            .arg(format!("/OUT:{}", &program_executable_file.display()))
+            .arg("/subsystem:console")
+            .arg("/release")
+            .arg("/incremental:no")
+            .arg("/opt:ref")
+            .arg("/opt:icf")
+            .arg("/ltcg");
+        let output = command.output()?;
+        if !output.status.success() {
+            let stderr = String::from_utf8_lossy(&output.stderr);
+            let stdout = String::from_utf8_lossy(&output.stdout);
+            let error = format!("{}\n{}", stdout, stderr);
+            return Err(anyhow!(MinBas78Error::SystemError {
+                filenames: vec![
+                    program_object_file.to_string_lossy().to_string(),
+                    program_executable_file.to_string_lossy().to_string()
+                ],
+                message: Some(error)
+            }));
+        }
+        Ok(())
+    }
+
+    #[cfg(target_os = "linux")]
+    pub fn generate_executable_file(
+        program_object_file: &PathBuf,
+        program_library_file: &PathBuf,
+        program_executable_file: &PathBuf,
+    ) -> Result<()> {
+        let mut command = Command::new(utils::TOOL);
+        command
                 .arg(format!("{}", &program_object_file.display()))
                 .arg(program_library_file)
-                .arg("msvcrt.lib")
-                .arg("ws2_32.lib")
-                .arg("ntdll.lib")
-                .arg("userenv.lib")
-                .arg("advapi32.lib")
-                .arg("ole32.lib")
-                .arg("oleaut32.lib")
-                .arg(format!("/OUT:{}", &program_executable_file.display()))
-                .arg("/subsystem:console")
-                .arg("/release")
-                .arg("/incremental:no")
-                .arg("/opt:ref")
-                .arg("/opt:icf")
-                .arg("/ltcg")
+                //.arg("target/debug/libminbas78.a")
+                .arg(format!("-o{}", &program_executable_file.display()))
+                //.arg(format!("-oTEST"))
                 ;
         let output = command.output()?;
         if !output.status.success() {

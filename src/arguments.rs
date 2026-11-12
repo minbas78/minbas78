@@ -57,6 +57,7 @@ Options:
     --dot                       Generates the Intermediate Representation
     --ron                       Generates the Rusty Object Notation
     -V, --version               Print version info and exit
+
 {after-help}";
 
 /// # pub struct `Arguments`.

@@ -1,3 +1,11 @@
+Version 0.0.2  (2026-11-12)
+===============================
+
+   * The `minbas78` *compiler* now works with the following configurations:
+      * Linux:   `x86_64-unknown-linux-musl` target.
+      * Windows: `x86_64-pc-windows-msvc` target.
+
+
 Version 0.0.1  (2026-10-20)
 ===============================
 

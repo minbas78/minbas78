@@ -5,7 +5,7 @@
 ```
 <sub>Made with the <a href="https://linguaholic.com/tools/ascii-art-generator/" target="_blank">`Linguaholic ASCII Art Generator`</a> · Font: “Mini Block” by Linguaholic</sub>
 
-This is the main source code repository for the `minbas78`, aka *Minimal BASIC 1978 Compiler*, built as an homage to the classic 1978 <a href="https://ecma-international.org/publications-and-standards/standards/ecma-55/" target="_blank">STANDARD ECMA-55 Minimal BASIC</a> and <u>ANSI X3.60-1978</u> language specifications. It contains the Windows (*linux and macOS are coming soon...*) compiler and documentation.
+This is the main source code repository for the `minbas78`, aka *Minimal BASIC 1978 Compiler*, built as an homage to the classic 1978 <a href="https://ecma-international.org/publications-and-standards/standards/ecma-55/" target="_blank">STANDARD ECMA-55 Minimal BASIC</a> and <u>ANSI X3.60-1978</u> language specifications. It contains the `linux` and `Windows` (*`macOS` is coming soon...*) compilers and documentation.
 
 ```basic
 10 REM IF YOU ARE NERD THEN MINBAS78
@@ -92,6 +92,27 @@ The rest of this chapter uses commands that work in _cmd.exe_.
 > <br>
 
 ## Installation
+
+### Linux
+
+You can download the latest binary release `minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz` from <a href="https://github.com/minbas78/minbas78/releases/latest/" target="_blank">GitHub</a> latest releases and tags. You’ll need
+an internet connection for the download and replace the `a.b.c` version you prefer.
+
+```batch
+> curl -L "https://github.com/minbas78/minbas78/releases/download/va.b.c/minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz"
+```
+The `gpg` command line script for verifying the `minbas78` versions and associated tools:
+
+```batch
+> gpg --no-default-keyring --keyring minbas78.asc --verify minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz.asc minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz
+```
+The `tar` command line script for unzip the `minbas78` compiler and library:
+
+```batch
+> tar -xf minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz
+```
+
+### Windows
 
 You can download the latest binary release `minbas78-a.b.c-x86_64-pc-windows-msvc.zip` from <a href="https://github.com/minbas78/minbas78/releases/latest/" target="_blank">GitHub</a> latest releases and tags. You’ll need
 an internet connection for the download and replace the `a.b.c` version you prefer.

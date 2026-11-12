@@ -20,7 +20,7 @@ use cranelift_codegen::{
     ir::{Block, InstBuilder, types},
 };
 use cranelift_module::Module;
-use std::{fs, path::Path, process::ExitCode};
+use std::{env, fs, path::Path, process::ExitCode};
 
 fn main() -> ExitCode {
     if let Err(error) = run() {
@@ -117,11 +117,6 @@ fn run() -> Result<()> {
             .ok_or(MinBas78Error::RuntimeError {
                 message: String::from("program_executable_folder"),
             })?;
-    let program_executable_extension = minbas78_settings
-        .get("program_executable_extension")
-        .ok_or(MinBas78Error::RuntimeError {
-            message: String::from("program_executable_extension"),
-        })?;
     let input_bas_filename = arguments
         .input
         .to_str()
@@ -162,18 +157,36 @@ fn run() -> Result<()> {
             .ok_or(MinBas78Error::RuntimeError {
                 message: String::from("program_library_folder"),
             })?;
+    #[cfg(target_os = "windows")]
     let program_library_extension =
         minbas78_settings
             .get("program_library_extension")
             .ok_or(MinBas78Error::RuntimeError {
                 message: String::from("program_library_extension"),
             })?;
+    #[cfg(target_os = "linux")]
+    let program_library_extension = &String::from(utils::LINUX_PROGRAM_LIBRARY_EXTENSION);
+    #[cfg(target_os = "windows")]
     let program_library_filename =
         Path::new(&arguments::MINBAS78).with_extension(program_library_extension);
+    #[cfg(target_os = "linux")]
+    let program_library_filename = Path::new(&format!("{}{}", "lib", &arguments::MINBAS78))
+        .with_extension(program_library_extension);
     let program_library_file = &Path::new(program_library_folder).join(program_library_filename);
+    #[cfg(target_os = "windows")]
+    let program_executable_extension = minbas78_settings
+        .get("program_executable_extension")
+        .ok_or(MinBas78Error::RuntimeError {
+            message: String::from("program_executable_extension"),
+        })?;
+    #[cfg(target_os = "windows")]
     let program_executable_filename = arguments
         .output
         .unwrap_or_else(|| Path::new(&filename).with_extension(&program_executable_extension));
+    #[cfg(target_os = "linux")]
+    let program_executable_filename = arguments
+        .output
+        .unwrap_or_else(|| Path::new(&filename).to_path_buf());
     let program_executable_file =
         &Path::new(&program_executable_folder).join(&program_executable_filename);
     let program = Visitor::get_program(input_bas_file)?;

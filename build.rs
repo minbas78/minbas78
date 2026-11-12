@@ -34,6 +34,16 @@ const DATE_DEFAULT: &str = "2026-10-20";
 const RESOURCE_FILENAME: &str = "resources.rc";
 
 fn main() -> ExitCode {
+    match env::var("PROFILE") {
+        Ok(profile) => {
+            println!("cargo:rustc-env=PROFILE={}", profile);
+        }
+        Err(error) => {
+            let error_string = error.to_string().to_uppercase();
+            println!("{}BUILD ERROR\t{:?}", NEW_LINE, error_string);
+            return ExitCode::FAILURE;
+        }
+    }
     match env::var("CARGO_PKG_NAME") {
         Ok(minbas78) => {
             println!("cargo:rustc-env=MINBAS78={}", minbas78);

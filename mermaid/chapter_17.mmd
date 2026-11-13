@@ -1,0 +1,19 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  17. DATA STATEMENT                                                       *
+    *****************************************************************************/
+    %%/// `data_statement` grammar rule.
+    %%///
+    data_statement = {space}, "DATA", {space}, data_list;
+
+    %%/// `data_list` grammar rule.
+    %%///
+    data_list = datum, {comma, datum};

@@ -1,0 +1,45 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  6. CONSTANTS                                                             *
+    *****************************************************************************/
+    %%// unused `numeric_constant` grammar rule.
+    %%//
+    %%// numeric_constant = sign?, numeric_rep }
+
+    %%/// `sign` grammar rule.
+    %%///
+    sign = plus_sign | minus_sign;
+
+    %%/// `numeric_rep` grammar rule.
+    %%///
+    numeric_rep = significand, [exrad];
+
+    %%/// `significand` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `significand = integer, full_stop? | integer?, fraction }`
+    significand = [integer], fraction | integer, [full_stop];
+
+    %%/// `integer` grammar rule.
+    %%///
+    integer = digit, {digit};
+
+    %%/// `fraction` grammar rule.
+    %%///
+    fraction = full_stop, digit, {digit};
+
+    %%/// `exrad` grammar rule.
+    %%///
+    exrad = "E", [sign], integer;
+
+    %%/// `string_constant` grammar rule.
+    %%///
+    string_constant = quoted_string;

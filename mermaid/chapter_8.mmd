@@ -1,0 +1,64 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  8. EXPRESSIONS                                                           *
+    *****************************************************************************/
+    %%/// `expression` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `expression = { numeric_expression | string_expression }`
+    expression = string_expression | numeric_expression;
+
+    %%/// `numeric_expression` grammar rule.
+    %%///
+    numeric_expression = [sign], term, {sign, term};
+
+    %%/// `term` grammar rule.
+    %%///
+    term = factor, {multiplier, factor};
+
+    %%/// `factor` grammar rule.
+    %%///
+    factor = primary, {circumflex_accent, primary};
+
+    %%/// `multiplier` grammar rule.
+    %%///
+    multiplier = asterisk | solidus;
+
+    %%/// `primary` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `primary = { numeric_variable | numeric_rep | numeric_function_ref | left_parenthesis, numeric_expression, right_parenthesis }`
+    primary = numeric_function_ref | numeric_variable | numeric_rep | numeric_expression_other;
+
+    %%/// `numeric_expression_other` grammar rule.
+    %%///  
+    %%/// new grammar to group in `primary` the last rule `left_parenthesis, numeric_expression, right_parenthesis`:  
+    numeric_expression_other = left_parenthesis, numeric_expression, right_parenthesis;
+
+    %%/// `numeric_function_ref` grammar rule.
+    %%///
+    numeric_function_ref = numeric_function_name, [argument_list];
+
+    %%/// `numeric_function_name` grammar rule.
+    %%///
+    numeric_function_name = numeric_defined_function | numeric_supplied_function;
+
+    %%/// `argument_list` grammar rule.
+    %%///
+    argument_list = left_parenthesis, argument, right_parenthesis;
+
+    %%/// `argument` grammar rule.
+    %%///
+    argument = numeric_expression;
+
+    %%/// `string_expression` grammar rule.
+    %%///
+    string_expression = string_variable | string_constant;

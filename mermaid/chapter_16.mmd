@@ -1,0 +1,19 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  16. READ AND RESTORE STATEMENTS                                          *
+    *****************************************************************************/
+    %%/// `read_statement` grammar rule.
+    %%///
+    read_statement = {space}, "READ", {space}, variable_list;
+
+    %%/// `restore_statement` grammar rule.
+    %%///
+    restore_statement = {space}, "RESTORE", {space};

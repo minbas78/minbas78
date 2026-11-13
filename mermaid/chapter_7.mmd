@@ -1,0 +1,41 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  7. VARIABLES                                                             *
+    *****************************************************************************/
+    %%/// `variable` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `variable = numeric_variable | string_variable }`
+    variable = string_variable | numeric_variable;
+
+    %%/// `numeric_variable` grammar rule.
+    %%///
+    numeric_variable = numeric_array_element | simple_numeric_variable;
+
+    %%/// `simple_numeric_variable` grammar rule.
+    %%///
+    simple_numeric_variable = letter, [digit];
+
+    %%/// `numeric_array_element` grammar rule.
+    %%///
+    numeric_array_element = numeric_array_name, subscript;
+
+    %%/// `numeric_array_name` grammar rule.
+    %%///
+    numeric_array_name = letter;
+
+    %%/// `subscript` grammar rule.
+    %%///
+    subscript = left_parenthesis, numeric_expression, [comma, numeric_expression], right_parenthesis;
+
+    %%/// `string_variable` grammar rule.
+    %%///
+    string_variable = letter, dollar_sign;

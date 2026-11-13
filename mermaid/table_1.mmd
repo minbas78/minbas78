@@ -1,0 +1,119 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  TABLE 1                                                                  *
+    *****************************************************************************/
+    %%/// `space` grammar rule that represents the `" "` character.
+    %%///
+    space = " ";
+
+    %%/// `exclamation_mark` grammar rule that represents the `"!"` character.
+    %%///
+    exclamation_mark = {space}, "!", {space};
+
+    %%/// `quotation_mark` grammar rule that represents the `"\"` character.
+    %%///
+    quotation_mark = {space}, "\"", {space};
+
+    %%/// `number_sign` grammar rule that represents the `"#"` character.
+    %%///
+    number_sign = {space}, "#", {space};
+
+    %%/// `dollar_sign` grammar rule that represents the `"$"` character.
+    %%///
+    dollar_sign = {space}, "$", {space};
+
+    %%/// `percent_sign` grammar rule that represents the `"%"` character.
+    %%///
+    percent_sign = {space}, "%", {space};
+
+    %%/// `ampersand` grammar rule that represents the `"&"` character.
+    %%///
+    ampersand = {space}, "&", {space};
+
+    %%/// `apostrophe` grammar rule that represents the `"'"` character.
+    %%///
+    apostrophe = {space}, "'", {space};
+
+    %%/// `left_parenthesis` grammar rule that represents the `"("` character.
+    %%///
+    left_parenthesis = {space}, "(", {space};
+
+    %%/// `right_parenthesis` grammar rule that represents the `")"` character.
+    %%///
+    right_parenthesis = {space}, ")", {space};
+
+    %%/// `asterisk` grammar rule that represents the `"*"` character.
+    %%///
+    asterisk = {space}, "*", {space};
+
+    %%/// `plus_sign` grammar rule that represents the `"+"` character.
+    %%///
+    plus_sign = {space}, "+", {space};
+
+    %%/// `comma` grammar rule that represents the `","` character.
+    %%///
+    comma = {space}, ",", {space};
+
+    %%/// `minus_sign` grammar rule that represents the `"-"` character.
+    %%///
+    minus_sign = {space}, "-", {space};
+
+    %%/// `full_stop` grammar rule that represents the `"."` character.
+    %%///
+    full_stop = {space}, ".", {space};
+
+    %%/// `solidus` grammar rule that represents the `"/"` character.
+    %%///
+    solidus = {space}, "/", {space};
+
+    %%/// `colon` grammar rule that represents the `":"` character.
+    %%///
+    colon = {space}, ":", {space};
+
+    %%// unused `digits` grammar rule.
+    %%//
+    %%//digits
+
+    %%/// `semi_colon` grammar rule that represents the `";"` character.
+    %%///
+    semi_colon = {space}, ";", {space};
+
+    %%/// `semicolon` alias for the `semi_color` grammar rule.
+    %%///
+    semicolon = semi_colon;
+
+    %%/// `less_than_sign` grammar rule that represents the `"<"` character.
+    %%///
+    less_than_sign = {space}, "‹", {space};
+
+    %%/// `equals_sign` grammar rule that represents the `"="` character.
+    %%///
+    equals_sign = {space}, "=", {space};
+
+    %%/// `greater_than_sign` grammar rule that represents the `">"` character.
+    %%///
+    greater_than_sign = {space}, ">", {space};
+
+    %%/// `question_mark` grammar rule that represents the `"?"` character.
+    %%///
+    question_mark = {space}, "?", {space};
+
+    %%// unused `letters` grammar rule.
+    %%//
+    %%//letters
+
+    %%/// `circumflex_accent` grammar rule that represents the `"^"` character.
+    %%///
+    circumflex_accent = {space}, "^", {space};
+
+    %%/// `underline` grammar rule that represents the `"_"` character.
+    %%///
+    underline = {space}, "_", {space};

@@ -1,0 +1,27 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  10. USER DEFINED FUNCTIONS                                               *
+    *****************************************************************************/
+    %%/// `def_statement` grammar rule.
+    %%///
+    def_statement = {space}, "DEF", {space}, numeric_defined_function, [parameter_list], equals_sign, numeric_expression;
+
+    %%/// `numeric_defined_function` grammar rule.
+    %%///
+    numeric_defined_function = "FN", letter;
+
+    %%/// `parameter_list` grammar rule.
+    %%///
+    parameter_list = left_parenthesis, parameter, right_parenthesis;
+
+    %%/// `parameter` grammar rule.
+    %%///
+    parameter = simple_numeric_variable;

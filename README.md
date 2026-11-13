@@ -67,6 +67,64 @@ This is the main source code repository for the `minbas78`, aka *Minimal BASIC 1
 - `READ` and `RESTORE` statements.
 - `REM` remark statement.
 
+## Grammar Rules
+
+The syntax and semantic rules for interpreting the meaning of a program written in `minbas78` according to the chapters of the _1978 STANDARD ECMA-55 Minimal BASIC_.
+
+### *Chapter 4. Characters and Strings*
+![Chapter 4](./images/chapter_4.svg)
+
+### *Chapter 5. Programs*
+![Chapter 5](./images/chapter_5.svg)
+
+### *Chapter 6. Constants*
+![Chapter 6](./images/chapter_6.svg)
+
+### *Chapter 7. Variables*
+![Chapter 7](./images/chapter_7.svg)
+
+### *Chapter 8. Expressions*
+![Chapter 8](./images/chapter_8.svg)
+
+### *Chapter 9. Implementation Supplied Functions*
+![Chapter 9](./images/chapter_9.svg)
+
+### *Chapter 10. User Defined Functions*
+![Chapter 10](./images/chapter_10.svg)
+
+### *Chapter 11. `LET` Statement*
+![Chapter 11](./images/chapter_11.svg)
+
+### *Chapter 12. Control Statement*
+![Chapter 12](./images/chapter_12.svg)
+
+### *Chapter 13. `FOR` and `NEXT` Statements*
+![Chapter 13](./images/chapter_13.svg)
+
+### *Chapter 14. `PRINT` statement*
+![Chapter 14](./images/chapter_14.svg)
+
+### *Chapter 15. `INPUT` statement*
+![Chapter 15](./images/chapter_15.svg)
+
+### *Chapter 16. `READ` and `RESTORE` statements*
+![Chapter 16](./images/chapter_16.svg)
+
+### *Chapter 17. `DATA` statement*
+![Chapter 17](./images/chapter_17.svg)
+
+### *Chapter 18. Array Declarations*
+![Chapter 18](./images/chapter_18.svg)
+
+### *Chapter 19. Remark Statement*
+![Chapter 19](./images/chapter_19.svg)
+
+### *Chapter 20. Randomize Statement*
+![Chapter 20](./images/chapter_20.svg)
+
+### *Table 1*
+![Table 1](./images/table_1.svg)
+
 ## Quick Start
 
 The first step is to install `minbas78`. 
@@ -112,6 +170,19 @@ The `tar` command line script for unzip the `minbas78` compiler and library:
 > tar -xf minbas78-a.b.c-x86_64-unknown-linux-musl.tar.gz
 ```
 
+The command line scripts for compile and execute the `Dartmouth first 1964-05-01 BASIC` source code file with the `minbas78` compiler and library:
+
+```batch
+> cat examples/DARTMOUTH_FIRST_1964_05_01.bas
+10 PRINT 2+2
+20 END
+
+> ./minbas78 examples/DARTMOUTH_FIRST_1964_05_01.bas
+> ./examples/DARTMOUTH_FIRST_1964_05_01
+ 4
+> 
+```
+
 ### Windows
 
 You can download the latest binary release `minbas78-a.b.c-x86_64-pc-windows-msvc.zip` from <a href="https://github.com/minbas78/minbas78/releases/latest/" target="_blank">GitHub</a> latest releases and tags. You’ll need
@@ -129,6 +200,19 @@ The `tar` command line script for unzip the `minbas78` compiler and library:
 
 ```batch
 > tar -xf minbas78-a.b.c-x86_64-pc-windows-msvc.zip
+```
+
+The command line scripts for compile and execute the `Dartmouth first 1964-05-01 BASIC` source code file with the `minbas78` compiler and library:
+
+```batch
+> type examples\DARTMOUTH_FIRST_1964_05_01.bas
+10 PRINT 2+2
+20 END
+
+> minbas78.exe examples\DARTMOUTH_FIRST_1964_05_01.bas
+> examples\DARTMOUTH_FIRST_1964_05_01.exe
+ 4
+> 
 ```
 
 ### Troubleshooting

@@ -1,0 +1,15 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  19. REMARK STATEMENT                                                     *
+    *****************************************************************************/
+    %%/// `remark_statement` grammar rule.
+    %%///
+    remark_statement = {space}, "REM", {space}, remark_string;

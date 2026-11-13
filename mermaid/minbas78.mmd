@@ -1,0 +1,582 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  4. CHARACTERS AND STRINGS                                                *
+    *****************************************************************************/
+    %%/// `letter` grammar rule that represents any ASCII uppercase letter `(A-Z)`.
+    %%///
+    letter = "ASCII_ALPHA_UPPER";
+
+    %%/// `digit` grammar rule that represents any ASCII digit `(0-9)`.
+    %%///
+    digit = "ASCII_DIGIT";
+
+    %%/// `string_character` grammar rule.
+    %%///
+    string_character = quotation_mark | quoted_string_character;
+
+    %%/// `quoted_string_character` grammar rule.
+    %%///
+    quoted_string_character = exclamation_mark | number_sign | dollar_sign | percent_sign | ampersand | apostrophe | left_parenthesis | right_parenthesis | asterisk | comma | solidus | colon | semi_colon | less_than_sign | equals_sign | greater_than_sign | question_mark | circumflex_accent | underline | unquoted_string_character;
+
+    %%/// `unquoted_string_character` grammar rule.
+    %%///
+    unquoted_string_character = space | plain_string_character;
+
+    %%/// `plain_string_character` grammar rule.
+    %%///
+    plain_string_character = plus_sign | minus_sign | full_stop | digit | letter;
+
+    %%/// `remark_string` grammar rule.
+    %%///
+    remark_string = { string_character };
+
+    %%/// `quoted_string` grammar rule.
+    %%///
+    quoted_string = quotation_mark, {quoted_string_character}, quotation_mark;
+
+    %%/// `unquoted_string` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `unquoted_string = plain_string_character, unquoted_string_character*, plain_string_character | plain_string_character }`
+    unquoted_string = plain_string_character, {unquoted_string_character}, plain_string_character | {plain_string_character};
+
+    /*****************************************************************************
+    *  5. PROGRAMS                                                              *
+    *****************************************************************************/
+    %%/// `program` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `program = { block*, end_line }`
+    program = {block}, end_line, "EOI";
+
+    %%/// `block` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `block = { (line | for_block)* }`
+    block= line | for_block;
+
+    %%/// `line` grammar rule.
+    %%///
+    line = line_number, statement, end_of_line;
+
+    %%/// `line_number` grammar rule.
+    %%///
+    line_number = digit, {digit}, {digit}, {digit};
+
+    %%/// `end_of_line` grammar rule.
+    %%///
+    end_of_line = "NEWLINE";
+
+    %%/// `end_line` grammar rule.
+    %%///
+    end_line = line_number, end_statement, end_of_line;
+
+    %%/// `end_statement` grammar rule.
+    %%///
+    end_statement = {space}, "'END'", {space};
+
+    %%/// `statement` grammar rule.
+    %%///
+    statement = data_statement | def_statement | dimension_statement | gosub_statement | goto_statement | if_then_statement | input_statement | let_statement | on_goto_statement | option_statement | print_statement | randomize_statement | read_statement | remark_statement | restore_statement | return_statement | stop_statement;
+
+    /*****************************************************************************
+    *  6. CONSTANTS                                                             *
+    *****************************************************************************/
+    %%// unused `numeric_constant` grammar rule.
+    %%//
+    %%// numeric_constant = sign?, numeric_rep }
+
+    %%/// `sign` grammar rule.
+    %%///
+    sign = plus_sign | minus_sign;
+
+    %%/// `numeric_rep` grammar rule.
+    %%///
+    numeric_rep = significand, [exrad];
+
+    %%/// `significand` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `significand = integer, full_stop? | integer?, fraction }`
+    significand = [integer], fraction | integer, [full_stop];
+
+    %%/// `integer` grammar rule.
+    %%///
+    integer = digit, {digit};
+
+    %%/// `fraction` grammar rule.
+    %%///
+    fraction = full_stop, digit, {digit};
+
+    %%/// `exrad` grammar rule.
+    %%///
+    exrad = "'E'", [sign], integer;
+
+    %%/// `string_constant` grammar rule.
+    %%///
+    string_constant = quoted_string;
+
+    /*****************************************************************************
+    *  7. VARIABLES                                                             *
+    *****************************************************************************/
+    %%/// `variable` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `variable = numeric_variable | string_variable }`
+    variable = string_variable | numeric_variable;
+
+    %%/// `numeric_variable` grammar rule.
+    %%///
+    numeric_variable = numeric_array_element | simple_numeric_variable;
+
+    %%/// `simple_numeric_variable` grammar rule.
+    %%///
+    simple_numeric_variable = letter, [digit];
+
+    %%/// `numeric_array_element` grammar rule.
+    %%///
+    numeric_array_element = numeric_array_name, subscript;
+
+    %%/// `numeric_array_name` grammar rule.
+    %%///
+    numeric_array_name = letter;
+
+    %%/// `subscript` grammar rule.
+    %%///
+    subscript = left_parenthesis, numeric_expression, [comma, numeric_expression], right_parenthesis;
+
+    %%/// `string_variable` grammar rule.
+    %%///
+    string_variable = letter, dollar_sign;
+
+    /*****************************************************************************
+    *  8. EXPRESSIONS                                                           *
+    *****************************************************************************/
+    %%/// `expression` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `expression = { numeric_expression | string_expression }`
+    expression = string_expression | numeric_expression;
+
+    %%/// `numeric_expression` grammar rule.
+    %%///
+    numeric_expression = [sign], term, {sign, term};
+
+    %%/// `term` grammar rule.
+    %%///
+    term = factor, {multiplier, factor};
+
+    %%/// `factor` grammar rule.
+    %%///
+    factor = primary, {circumflex_accent, primary};
+
+    %%/// `multiplier` grammar rule.
+    %%///
+    multiplier = asterisk | solidus;
+
+    %%/// `primary` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `primary = { numeric_variable | numeric_rep | numeric_function_ref | left_parenthesis, numeric_expression, right_parenthesis }`
+    primary = numeric_function_ref | numeric_variable | numeric_rep | numeric_expression_other;
+
+    %%/// `numeric_expression_other` grammar rule.
+    %%///  
+    %%/// new grammar to group in `primary` the last rule `left_parenthesis, numeric_expression, right_parenthesis`:  
+    numeric_expression_other = left_parenthesis, numeric_expression, right_parenthesis;
+
+    %%/// `numeric_function_ref` grammar rule.
+    %%///
+    numeric_function_ref = numeric_function_name, [argument_list];
+
+    %%/// `numeric_function_name` grammar rule.
+    %%///
+    numeric_function_name = numeric_defined_function | numeric_supplied_function;
+
+    %%/// `argument_list` grammar rule.
+    %%///
+    argument_list = left_parenthesis, argument, right_parenthesis;
+
+    %%/// `argument` grammar rule.
+    %%///
+    argument = numeric_expression;
+
+    %%/// `string_expression` grammar rule.
+    %%///
+    string_expression = string_variable | string_constant;
+
+    /*****************************************************************************
+    *  9. IMPLEMENTATION SUPPLIED FUNCTIONS                                     *
+    *****************************************************************************/
+    %%/// `numeric_supplied_function` grammar rule.
+    %%///
+    numeric_supplied_function = "ABS" | "ATN" | "COS" | "EXP" | "INT" | "LOG" | "RND" | "SGN" | "SIN" | "SQR" | "TAN";
+
+    /*****************************************************************************
+    *  10. USER DEFINED FUNCTIONS                                               *
+    *****************************************************************************/
+    %%/// `def_statement` grammar rule.
+    %%///
+    def_statement = {space}, "DEF", {space}, numeric_defined_function, [parameter_list], equals_sign, numeric_expression;
+
+    %%/// `numeric_defined_function` grammar rule.
+    %%///
+    numeric_defined_function = "FN", letter;
+
+    %%/// `parameter_list` grammar rule.
+    %%///
+    parameter_list = left_parenthesis, parameter, right_parenthesis;
+
+    %%/// `parameter` grammar rule.
+    %%///
+    parameter = simple_numeric_variable;
+
+    /*****************************************************************************
+    *  11. LET_STATEMENT                                                        *
+    *****************************************************************************/
+    %%/// `let_statement` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `let_statement = numeric_let_statement | string_let_statement }`
+    let_statement = string_let_statement | numeric_let_statement;
+
+    %%/// `numeric_let_statement` grammar rule.
+    %%///
+    numeric_let_statement = {space}, "LET", {space}, numeric_variable, equals_sign, numeric_expression;
+
+    %%/// `string_let_statement` grammar rule.
+    %%///
+    string_let_statement = {space}, "LET", {space}, string_variable, equals_sign, string_expression;
+
+    /*****************************************************************************
+    *  12. CONTROL STATEMENT                                                    *
+    *****************************************************************************/
+    %%/// `goto_statement` grammar rule.
+    %%///
+    goto_statement = {space}, "GO", {space}, "TO", {space}, line_number;
+
+    %%/// `if_then_statement` grammar rule.
+    %%///
+    if_then_statement = {space}, "IF", {space}, relational_expression, {space}, "THEN", {space}, line_number;
+
+    %%/// `relational_expression` grammar rule.
+    %%///
+    relational_expression= numeric_expression, relation, numeric_expression | string_expression, equality_relation, string_expression;
+
+    %%/// `relation` grammar rule.
+    %%///
+    %%//relation = { equality_relation | less_than_sign | greater_than_sign | not_less | not_greater }
+    relation = not_less | not_greater | equality_relation | less_than_sign | greater_than_sign;
+
+    %%/// `equality_relation` grammar rule.
+    %%///
+    equality_relation = equals_sign | not_equals;
+
+    %%/// `not_less` grammar rule.
+    %%///
+    not_less = greater_than_sign, equals_sign;
+
+    %%/// `not_greater` grammar rule.
+    %%///
+    not_greater = less_than_sign, equals_sign;
+
+    %%/// `not_equals` grammar rule.
+    %%///
+    not_equals = less_than_sign, greater_than_sign;
+
+    %%/// `gosub_statement` grammar rule.
+    %%///
+    gosub_statement = {space}, "GO", {space}, "SUB", {space}, line_number;
+
+    %%/// `return_statement` grammar rule.
+    %%///
+    return_statement = {space}, "RETURN", {space};
+
+    %%/// `on_goto_statement` grammar rule.
+    %%///
+    on_goto_statement = {space}, "ON", {space}, numeric_expression, {space}, "GO", {space}, "TO", {space}, line_number, {comma, line_number};
+
+    %%/// `stop_statement` grammar rule.
+    %%///
+    stop_statement = {space}, "STOP", {space};
+
+    /*****************************************************************************
+    *  13. FOR AND NEXT STATEMENTS                                              *
+    *****************************************************************************/
+    %%/// `for_block` grammar rule.
+    %%///
+    for_block = for_line, for_body;
+
+    %%/// `for_body` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `for_body = { block, next_line }`
+    for_body = {block}, next_line;
+
+    %%/// `for_line` grammar rule.
+    %%///
+    for_line = line_number, for_statement, end_of_line;
+
+    %%/// `next_line` grammar rule.
+    %%///
+    next_line = line_number, next_statement, end_of_line;
+
+    %%/// `for_statement` grammar rule.
+    %%///
+    for_statement = {space}, "FOR", {space}, control_variable, equals_sign, initial_value, {space}, "TO", {space}, limit, [{space}, "STEP", {space}, increment];
+
+    %%/// `control_variable` grammar rule.
+    %%///
+    control_variable = simple_numeric_variable;
+
+    %%/// `initial_value` grammar rule.
+    %%///
+    initial_value = numeric_expression;
+
+    %%/// `limit` grammar rule.
+    %%///
+    limit = numeric_expression;
+
+    %%/// `increment` grammar rule.
+    %%///
+    increment = numeric_expression;
+
+    %%/// `next_statement` grammar rule.
+    %%///
+    next_statement = {space}, "NEXT", {space}, control_variable;
+
+    /*****************************************************************************
+    *  14. PRINT STATEMENT                                                      *
+    *****************************************************************************/
+    %%/// `print_statement` grammar rule.
+    %%///
+    print_statement = {space}, "PRINT", {space}, [print_list];
+
+    %%/// `print_list` grammar rule.
+    %%///
+    print_list = {[print_item], print_separator}, [print_item];
+
+    %%/// `print_item` grammar rule.
+    %%///
+    %%//print_item                  = expression | tab_call }
+    print_item = tab_call | expression;
+
+    %%/// `tab_call` grammar rule.
+    %%///
+    tab_call = "TAB", left_parenthesis, numeric_expression, right_parenthesis;
+
+    %%/// `print_separator` grammar rule.
+    %%///
+    print_separator = comma | semicolon;
+
+    /*****************************************************************************
+    *  15. INPUT STATEMENT                                                      *
+    *****************************************************************************/
+    %%/// `input_statement` grammar rule.
+    %%///
+    input_statement = {space}, "INPUT", {space}, variable_list;
+
+    %%/// `variable_list` grammar rule.
+    %%///
+    variable_list = variable, {comma, variable};
+
+    %%// unused `input_prompt` grammar rule.
+    %%//
+    %%//input_prompt = [implementation_defined] }
+
+    %%// unused `input_reply` grammar rule.
+    %%//
+    %%//input_reply = input_list, end_of_line }
+
+    %%// unused `input_list` grammar rule.
+    %%//
+    %%//input_list = padded_datum, (comma, padded_datum)* }
+
+    %%// unused `padded_datum` grammar rule.
+    %%//
+    %%//padded_datum = {space}, datum, {space} }
+
+    %%/// `datum` grammar rule.
+    %%///
+    datum = quoted_string | unquoted_string;
+
+    /*****************************************************************************
+    *  16. READ AND RESTORE STATEMENTS                                          *
+    *****************************************************************************/
+    %%/// `read_statement` grammar rule.
+    %%///
+    read_statement = {space}, "READ", {space}, variable_list;
+
+    %%/// `restore_statement` grammar rule.
+    %%///
+    restore_statement = {space}, "RESTORE", {space};
+
+    /*****************************************************************************
+    *  17. DATA STATEMENT                                                       *
+    *****************************************************************************/
+    %%/// `data_statement` grammar rule.
+    %%///
+    data_statement = {space}, "DATA", {space}, data_list;
+
+    %%/// `data_list` grammar rule.
+    %%///
+    data_list = datum, {comma, datum};
+
+    /*****************************************************************************
+    *  18. ARRAY DECLARATIONS                                                   *
+    *****************************************************************************/
+    %%/// `dimension_statement` grammar rule.
+    %%///
+    dimension_statement = {space}, "DIM", {space}, array_declaration, {comma, array_declaration};
+
+    %%/// `array_declaration` grammar rule.
+    %%///
+    array_declaration= numeric_array_name, left_parenthesis, bounds, right_parenthesis;
+
+    %%/// `bounds` grammar rule.
+    %%///
+    bounds = integer, [comma, integer];
+
+    %%/// `option_statement` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `option_statement = { {space}, "OPTION", {space}, "BASE", {space}, ("0" | "1") }`
+    option_statement = {space}, "OPTION", {space}, "BASE", {space}, option_base;
+
+    %%/// `option_base` grammar rule.
+    %%///  
+    %%/// new grammar was for the `option_statement` grammar rule:  
+    option_base = "0" | "1";
+
+    /*****************************************************************************
+    *  19. REMARK STATEMENT                                                     *
+    *****************************************************************************/
+    %%/// `remark_statement` grammar rule.
+    %%///
+    remark_statement = {space}, "REM", {space}, remark_string;
+
+    /*****************************************************************************
+    *  20. RANDOMIZE STATEMENT                                                     *
+    *****************************************************************************/
+    %%/// `randomize_statement` grammar rule.
+    %%///
+    randomize_statement = {space}, "RANDOMIZE", {space};
+
+    /*****************************************************************************
+    *  TABLE 1                                                                  *
+    *****************************************************************************/
+    %%/// `space` grammar rule that represents the `" "` character.
+    %%///
+    space = " ";
+
+    %%/// `exclamation_mark` grammar rule that represents the `"!"` character.
+    %%///
+    exclamation_mark = {space}, "!", {space};
+
+    %%/// `quotation_mark` grammar rule that represents the `"\"` character.
+    %%///
+    quotation_mark = {space}, "\"", {space};
+
+    %%/// `number_sign` grammar rule that represents the `"#"` character.
+    %%///
+    number_sign = {space}, "#", {space};
+
+    %%/// `dollar_sign` grammar rule that represents the `"$"` character.
+    %%///
+    dollar_sign = {space}, "$", {space};
+
+    %%/// `percent_sign` grammar rule that represents the `"%"` character.
+    %%///
+    percent_sign = {space}, "%", {space};
+
+    %%/// `ampersand` grammar rule that represents the `"&"` character.
+    %%///
+    ampersand = {space}, "&", {space};
+
+    %%/// `apostrophe` grammar rule that represents the `"'"` character.
+    %%///
+    apostrophe = {space}, "'", {space};
+
+    %%/// `left_parenthesis` grammar rule that represents the `"("` character.
+    %%///
+    left_parenthesis = {space}, "(", {space};
+
+    %%/// `right_parenthesis` grammar rule that represents the `")"` character.
+    %%///
+    right_parenthesis = {space}, ")", {space};
+
+    %%/// `asterisk` grammar rule that represents the `"*"` character.
+    %%///
+    asterisk = {space}, "*", {space};
+
+    %%/// `plus_sign` grammar rule that represents the `"+"` character.
+    %%///
+    plus_sign = {space}, "+", {space};
+
+    %%/// `comma` grammar rule that represents the `","` character.
+    %%///
+    comma = {space}, ",", {space};
+
+    %%/// `minus_sign` grammar rule that represents the `"-"` character.
+    %%///
+    minus_sign = {space}, "-", {space};
+
+    %%/// `full_stop` grammar rule that represents the `"."` character.
+    %%///
+    full_stop = {space}, ".", {space};
+
+    %%/// `solidus` grammar rule that represents the `"/"` character.
+    %%///
+    solidus = {space}, "/", {space};
+
+    %%/// `colon` grammar rule that represents the `":"` character.
+    %%///
+    colon = {space}, ":", {space};
+
+    %%// unused `digits` grammar rule.
+    %%//
+    %%//digits
+
+    %%/// `semi_colon` grammar rule that represents the `";"` character.
+    %%///
+    semi_colon = {space}, ";", {space};
+
+    %%/// `semicolon` alias for the `semi_color` grammar rule.
+    %%///
+    semicolon = semi_colon;
+
+    %%/// `less_than_sign` grammar rule that represents the `"<"` character.
+    %%///
+    less_than_sign = {space}, "<", {space};
+
+    %%/// `equals_sign` grammar rule that represents the `"="` character.
+    %%///
+    equals_sign = {space}, "=", {space};
+
+    %%/// `greater_than_sign` grammar rule that represents the `">"` character.
+    %%///
+    greater_than_sign = {space}, ">", {space};
+
+    %%/// `question_mark` grammar rule that represents the `"?"` character.
+    %%///
+    question_mark = {space}, "?", {space};
+
+    %%// unused `letters` grammar rule.
+    %%//
+    %%//letters
+
+    %%/// `circumflex_accent` grammar rule that represents the `"^"` character.
+    %%///
+    circumflex_accent = {space}, "^", {space};
+
+    %%/// `underline` grammar rule that represents the `"_"` character.
+    %%///
+    underline = {space}, "_", {space};

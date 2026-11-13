@@ -1,0 +1,53 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  13. FOR AND NEXT STATEMENTS                                              *
+    *****************************************************************************/
+    %%/// `for_block` grammar rule.
+    %%///
+    for_block = for_line, for_body;
+
+    %%/// `for_body` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `for_body = { block, next_line }`
+    for_body = {block}, next_line;
+
+    %%/// `for_line` grammar rule.
+    %%///
+    for_line = line_number, for_statement, end_of_line;
+
+    %%/// `next_line` grammar rule.
+    %%///
+    next_line = line_number, next_statement, end_of_line;
+
+    %%/// `for_statement` grammar rule.
+    %%///
+    for_statement = {space}, "FOR", {space}, control_variable, equals_sign, initial_value, {space}, "TO", {space}, limit, [{space}, "STEP", {space}, increment];
+
+    %%/// `control_variable` grammar rule.
+    %%///
+    control_variable = simple_numeric_variable;
+
+    %%/// `initial_value` grammar rule.
+    %%///
+    initial_value = numeric_expression;
+
+    %%/// `limit` grammar rule.
+    %%///
+    limit = numeric_expression;
+
+    %%/// `increment` grammar rule.
+    %%///
+    increment = numeric_expression;
+
+    %%/// `next_statement` grammar rule.
+    %%///
+    next_statement = {space}, "NEXT", {space}, control_variable;

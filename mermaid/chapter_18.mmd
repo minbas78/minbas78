@@ -1,0 +1,34 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  18. ARRAY DECLARATIONS                                                   *
+    *****************************************************************************/
+    %%/// `dimension_statement` grammar rule.
+    %%///
+    dimension_statement = {space}, "DIM", {space}, array_declaration, {comma, array_declaration};
+
+    %%/// `array_declaration` grammar rule.
+    %%///
+    array_declaration= numeric_array_name, left_parenthesis, bounds, right_parenthesis;
+
+    %%/// `bounds` grammar rule.
+    %%///
+    bounds = integer, [comma, integer];
+
+    %%/// `option_statement` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `option_statement = { {space}, "OPTION", {space}, "BASE", {space}, ("0" | "1") }`
+    option_statement = {space}, "OPTION", {space}, "BASE", {space}, option_base;
+
+    %%/// `option_base` grammar rule.
+    %%///  
+    %%/// new grammar was for the `option_statement` grammar rule:  
+    option_base = "0" | "1";

@@ -1,0 +1,32 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  14. PRINT STATEMENT                                                      *
+    *****************************************************************************/
+    %%/// `print_statement` grammar rule.
+    %%///
+    print_statement = {space}, "PRINT", {space}, [print_list];
+
+    %%/// `print_list` grammar rule.
+    %%///
+    print_list = {[print_item], print_separator}, [print_item];
+
+    %%/// `print_item` grammar rule.
+    %%///
+    %%//print_item                  = expression | tab_call }
+    print_item = tab_call | expression;
+
+    %%/// `tab_call` grammar rule.
+    %%///
+    tab_call = "TAB", left_parenthesis, numeric_expression, right_parenthesis;
+
+    %%/// `print_separator` grammar rule.
+    %%///
+    print_separator = comma | semicolon;

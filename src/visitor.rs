@@ -612,6 +612,7 @@ impl<'a> Visitor<'a> {
             .arg("advapi32.lib")
             .arg("ole32.lib")
             .arg("oleaut32.lib")
+            .arg("synchronization.lib")
             .arg(format!("/OUT:{}", &program_executable_file.display()))
             .arg("/subsystem:console")
             .arg("/release")

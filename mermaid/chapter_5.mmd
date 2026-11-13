@@ -1,0 +1,47 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  5. PROGRAMS                                                              *
+    *****************************************************************************/
+    %%/// `program` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `program = { block*, end_line }`
+    program = {block}, end_line, "EOI";
+
+    %%/// `block` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `block = { (line | for_block)* }`
+    block= line | for_block;
+
+    %%/// `line` grammar rule.
+    %%///
+    line = line_number, statement, end_of_line;
+
+    %%/// `line_number` grammar rule.
+    %%///
+    line_number = digit, {digit}, {digit}, {digit};
+
+    %%/// `end_of_line` grammar rule.
+    %%///
+    end_of_line = "NEWLINE";
+
+    %%/// `end_line` grammar rule.
+    %%///
+    end_line = line_number, end_statement, end_of_line;
+
+    %%/// `end_statement` grammar rule.
+    %%///
+    end_statement = {space}, "END", {space};
+
+    %%/// `statement` grammar rule.
+    %%///
+    statement = data_statement | def_statement | dimension_statement | gosub_statement | goto_statement | if_then_statement | input_statement | let_statement | on_goto_statement | option_statement | print_statement | randomize_statement | read_statement | remark_statement | restore_statement | return_statement | stop_statement;

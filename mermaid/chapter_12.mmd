@@ -1,0 +1,60 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  12. CONTROL STATEMENT                                                    *
+    *****************************************************************************/
+    %%/// `goto_statement` grammar rule.
+    %%///
+    goto_statement = {space}, "GO", {space}, "TO", {space}, line_number;
+
+    %%/// `if_then_statement` grammar rule.
+    %%///
+    if_then_statement = {space}, "IF", {space}, relational_expression, {space}, "THEN", {space}, line_number;
+
+    %%/// `relational_expression` grammar rule.
+    %%///
+    relational_expression= numeric_expression, relation, numeric_expression | string_expression, equality_relation, string_expression;
+
+    %%/// `relation` grammar rule.
+    %%///
+    %%//relation = { equality_relation | less_than_sign | greater_than_sign | not_less | not_greater }
+    relation = not_less | not_greater | equality_relation | less_than_sign | greater_than_sign;
+
+    %%/// `equality_relation` grammar rule.
+    %%///
+    equality_relation = equals_sign | not_equals;
+
+    %%/// `not_less` grammar rule.
+    %%///
+    not_less = greater_than_sign, equals_sign;
+
+    %%/// `not_greater` grammar rule.
+    %%///
+    not_greater = less_than_sign, equals_sign;
+
+    %%/// `not_equals` grammar rule.
+    %%///
+    not_equals = less_than_sign, greater_than_sign;
+
+    %%/// `gosub_statement` grammar rule.
+    %%///
+    gosub_statement = {space}, "GO", {space}, "SUB", {space}, line_number;
+
+    %%/// `return_statement` grammar rule.
+    %%///
+    return_statement = {space}, "RETURN", {space};
+
+    %%/// `on_goto_statement` grammar rule.
+    %%///
+    on_goto_statement = {space}, "ON", {space}, numeric_expression, {space}, "GO", {space}, "TO", {space}, line_number, {comma, line_number};
+
+    %%/// `stop_statement` grammar rule.
+    %%///
+    stop_statement = {space}, "STOP", {space};

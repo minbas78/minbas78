@@ -1,0 +1,39 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  15. INPUT STATEMENT                                                      *
+    *****************************************************************************/
+    %%/// `input_statement` grammar rule.
+    %%///
+    input_statement = {space}, "INPUT", {space}, variable_list;
+
+    %%/// `variable_list` grammar rule.
+    %%///
+    variable_list = variable, {comma, variable};
+
+    %%// unused `input_prompt` grammar rule.
+    %%//
+    %%//input_prompt = [implementation_defined] }
+
+    %%// unused `input_reply` grammar rule.
+    %%//
+    %%//input_reply = input_list, end_of_line }
+
+    %%// unused `input_list` grammar rule.
+    %%//
+    %%//input_list = padded_datum, (comma, padded_datum)* }
+
+    %%// unused `padded_datum` grammar rule.
+    %%//
+    %%//padded_datum = {space}, datum, {space} }
+
+    %%/// `datum` grammar rule.
+    %%///
+    datum = quoted_string | unquoted_string;

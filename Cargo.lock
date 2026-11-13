@@ -273,7 +273,7 @@ dependencies = [
  "cranelift-control",
  "cranelift-entity",
  "cranelift-isle",
- "gimli 0.33.0",
+ "gimli",
  "hashbrown 0.17.1",
  "libm",
  "log",
@@ -501,12 +501,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "gimli"
-version = "0.34.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1033caf0b349c518623b5396bfb2cf0bddf44f0306d543a250e5743297aafd10"
-
-[[package]]
 name = "hashbrown"
 version = "0.14.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -621,7 +615,7 @@ checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
 
 [[package]]
 name = "minbas78"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "anyhow",
  "cc",
@@ -634,7 +628,6 @@ dependencies = [
  "cranelift-object",
  "embed-resource",
  "from-pest",
- "gimli 0.34.0",
  "pest",
  "pest-ast",
  "pest_derive",

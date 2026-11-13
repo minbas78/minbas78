@@ -1,0 +1,25 @@
+---
+config:
+    railroad:
+        terminalTextColor: "#000000"
+---
+%%//! Basic grammar rules.
+%%//!
+railroad-ebnf-beta
+
+    /*****************************************************************************
+    *  11. LET_STATEMENT                                                        *
+    *****************************************************************************/
+    %%/// `let_statement` grammar rule.
+    %%///  
+    %%/// the original grammar rule was:  
+    %%/// `let_statement = numeric_let_statement | string_let_statement }`
+    let_statement = string_let_statement | numeric_let_statement;
+
+    %%/// `numeric_let_statement` grammar rule.
+    %%///
+    numeric_let_statement = {space}, "LET", {space}, numeric_variable, equals_sign, numeric_expression;
+
+    %%/// `string_let_statement` grammar rule.
+    %%///
+    string_let_statement = {space}, "LET", {space}, string_variable, equals_sign, string_expression;

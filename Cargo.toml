@@ -1,9 +1,9 @@
 [package]
 name = "minbas78"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["foprofile"]
 edition = "2024"
-rust-version = "1.99.1"
+rust-version = "1.100.0"
 description = "Minimal BASIC 1978 Compiler"
 documentation = "https://docs.rs/minbas78/latest/minbas78/"
 readme = "README.md"

@@ -67,64 +67,6 @@ This is the main source code repository for the `minbas78`, aka *Minimal BASIC 1
 - `READ` and `RESTORE` statements.
 - `REM` remark statement.
 
-## Grammar Rules
-
-The syntax and semantic rules for interpreting the meaning of a program written in `minbas78` according to the chapters of the _1978 STANDARD ECMA-55 Minimal BASIC_.
-
-### *Chapter 4. Characters and Strings*
-![Chapter 4](./images/chapter_4.svg)
-
-### *Chapter 5. Programs*
-![Chapter 5](./images/chapter_5.svg)
-
-### *Chapter 6. Constants*
-![Chapter 6](./images/chapter_6.svg)
-
-### *Chapter 7. Variables*
-![Chapter 7](./images/chapter_7.svg)
-
-### *Chapter 8. Expressions*
-![Chapter 8](./images/chapter_8.svg)
-
-### *Chapter 9. Implementation Supplied Functions*
-![Chapter 9](./images/chapter_9.svg)
-
-### *Chapter 10. User Defined Functions*
-![Chapter 10](./images/chapter_10.svg)
-
-### *Chapter 11. `LET` Statement*
-![Chapter 11](./images/chapter_11.svg)
-
-### *Chapter 12. Control Statement*
-![Chapter 12](./images/chapter_12.svg)
-
-### *Chapter 13. `FOR` and `NEXT` Statements*
-![Chapter 13](./images/chapter_13.svg)
-
-### *Chapter 14. `PRINT` statement*
-![Chapter 14](./images/chapter_14.svg)
-
-### *Chapter 15. `INPUT` statement*
-![Chapter 15](./images/chapter_15.svg)
-
-### *Chapter 16. `READ` and `RESTORE` statements*
-![Chapter 16](./images/chapter_16.svg)
-
-### *Chapter 17. `DATA` statement*
-![Chapter 17](./images/chapter_17.svg)
-
-### *Chapter 18. Array Declarations*
-![Chapter 18](./images/chapter_18.svg)
-
-### *Chapter 19. Remark Statement*
-![Chapter 19](./images/chapter_19.svg)
-
-### *Chapter 20. Randomize Statement*
-![Chapter 20](./images/chapter_20.svg)
-
-### *Table 1*
-![Table 1](./images/table_1.svg)
-
 ## Quick Start
 
 The first step is to install `minbas78`. 
@@ -215,7 +157,65 @@ The command line scripts for compile and execute the `Dartmouth first 1964-05-01
 > 
 ```
 
-### Troubleshooting
+## Grammar Rules
+
+The syntax and semantic rules for interpreting the meaning of a program written in `minbas78` according to the chapters of the _1978 STANDARD ECMA-55 Minimal BASIC_.
+
+### *Chapter 4. Characters and Strings*
+![Chapter 4](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_4.svg)
+
+### *Chapter 5. Programs*
+![Chapter 5](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_5.svg)
+
+### *Chapter 6. Constants*
+![Chapter 6](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_6.svg)
+
+### *Chapter 7. Variables*
+![Chapter 7](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_7.svg)
+
+### *Chapter 8. Expressions*
+![Chapter 8](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_8.svg)
+
+### *Chapter 9. Implementation Supplied Functions*
+![Chapter 9](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_9.svg)
+
+### *Chapter 10. User Defined Functions*
+![Chapter 10](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_10.svg)
+
+### *Chapter 11. `LET` Statement*
+![Chapter 11](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_11.svg)
+
+### *Chapter 12. Control Statement*
+![Chapter 12](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_12.svg)
+
+### *Chapter 13. `FOR` and `NEXT` Statements*
+![Chapter 13](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_13.svg)
+
+### *Chapter 14. `PRINT` statement*
+![Chapter 14](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_14.svg)
+
+### *Chapter 15. `INPUT` statement*
+![Chapter 15](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_15.svg)
+
+### *Chapter 16. `READ` and `RESTORE` statements*
+![Chapter 16](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_16.svg)
+
+### *Chapter 17. `DATA` statement*
+![Chapter 17](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_17.svg)
+
+### *Chapter 18. Array Declarations*
+![Chapter 18](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_18.svg)
+
+### *Chapter 19. Remark Statement*
+![Chapter 19](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_19.svg)
+
+### *Chapter 20. Randomize Statement*
+![Chapter 20](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/chapter_20.svg)
+
+### *Table 1*
+![Table 1](https://raw.githubusercontent.com/minbas78/minbas78/refs/heads/master/images/table_1.svg)
+
+## Troubleshooting
 
 To check whether you have `minbas78` installed correctly, open a shell and enter this line:
 
@@ -237,7 +237,7 @@ If you see this information, you have installed `minbas78` successfully!
 
 If that’s all correct and `minbas78` still isn’t working, you can get help in the <a href="https://discord.com/channels/1566230110284292188/1566230111819141223" target="_blank">minbas78 Discord Server</a>.
 
-### Updating and Uninstalling
+## Updating and Uninstalling
 
 Once `minbas78` is installed, updating to a newly released version is
 easy. Download the new release and repeat the installation steps.

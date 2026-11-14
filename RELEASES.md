@@ -1,3 +1,27 @@
+Version 0.0.4  (2026-11-14)
+===============================
+
+   * The `README.md` now includes all of the `mindmap` *grammar rules* images:
+      * *Chapter 4. Characters and Strings*
+      * *Chapter 5. Programs*
+      * *Chapter 6. Constants*
+      * *Chapter 7. Variables*
+      * *Chapter 8. Expressions*
+      * *Chapter 9. Implementation Supplied Functions*
+      * *Chapter 10. User Defined Functions*
+      * *Chapter 11. `LET` Statement*
+      * *Chapter 12. Control Statement*
+      * *Chapter 13. `FOR` and `NEXT` Statements*
+      * *Chapter 14. `PRINT` statement*
+      * *Chapter 15. `INPUT` statement*
+      * *Chapter 16. `READ` and `RESTORE` statements*
+      * *Chapter 17. `DATA` statement*
+      * *Chapter 18. Array Declarations*
+      * *Chapter 19. Remark Statement*
+      * *Chapter 20. Randomize Statement*
+      * *Table 1*
+
+
 Version 0.0.3  (2026-11-13)
 ===============================
 
